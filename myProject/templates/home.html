@@ -1,18 +1,99 @@
-{% extends 'base.html' %}
+{% extends 'base_layout.html' %}
 {% load static %}
+
 {% block content %}
+<div class="max-w-6xl mx-auto space-y-16">
 
-<html lang="he">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>דף הבית</title>
-</head>
-<body>
-<h1>welcome !!!!!!</h1>
- <a href="{% url 'register' %}">Register</a>
-<button>Login</button>
-</body>
-</html>
+    <section class="text-center space-y-6 pt-10">
+        <h1 class="text-5xl md:text-7xl font-black tracking-tight leading-tight">
+            נהל את המשימות שלך <br>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-cyan-400">
+                בצורה חכמה יותר
+            </span>
+        </h1>
+        <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
+            TASKS PRO היא הפלטפורמה המתקדמת ביותר לניהול פרויקטים, מעקב אחר ביצועי עובדים וייעוץ זמנים בזמן אמת.
+        </p>
 
+        {% if not user.is_authenticated %}
+        <div class="flex flex-wrap justify-center gap-4 pt-4">
+            <a href="{% url 'register' %}" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all hover:scale-105 no-underline">
+                הצטרף עכשיו
+            </a>
+            <a href="{% url 'login' %}" class="px-8 py-4 bg-white/5 hover:bg-white/10 text-white border border-white/10 rounded-2xl font-bold text-lg transition-all no-underline">
+                כניסת רשומים
+            </a>
+        </div>
+        {% else %}
+        <div class="pt-4">
+            <a href="{% url 'tasks' %}" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all hover:scale-105 no-underline">
+                עבור ללוח המשימות שלי
+            </a>
+        </div>
+        {% endif %}
+    </section>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-colors">
+            <div class="text-blue-500 text-4xl font-black mb-2">99%</div>
+            <div class="text-white font-bold text-lg">עמידה בזמנים</div>
+            <p class="text-gray-500 text-sm mt-2">המערכת עוזרת לצוותים לעמוד ביעדים בצורה מדויקת.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-colors">
+            <div class="text-cyan-400 text-4xl font-black mb-2">24/7</div>
+            <div class="text-white font-bold text-lg">זמינות מלאה</div>
+            <p class="text-gray-500 text-sm mt-2">גישה למשימות מכל מקום בעולם, בכל זמן ובכל מכשיר.</p>
+        </div>
+        <div class="bg-white/5 border border-white/10 p-8 rounded-3xl backdrop-blur-sm hover:bg-white/10 transition-colors">
+            <div class="text-blue-400 text-4xl font-black mb-2">100%</div>
+            <div class="text-white font-bold text-lg">אבטחת מידע</div>
+            <p class="text-gray-500 text-sm mt-2">הנתונים שלך מוצפנים ונשמרים בשרתים המאובטחים ביותר.</p>
+        </div>
+    </div>
+
+    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center pb-20">
+        <div class="space-y-6">
+            <h2 class="text-3xl font-bold text-white">למה לבחור ב-TASKS PRO?</h2>
+            <ul class="space-y-4 list-none p-0">
+                <li class="flex items-start gap-4">
+                    <div class="w-6 h-6 bg-blue-500/20 rounded flex items-center justify-center mt-1">
+                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                    </div>
+                    <div>
+                        <strong class="text-white">ממשק גרירה ושחרור:</strong>
+                        <p class="text-gray-400 text-sm">סידור משימות קל ואינטואיטיבי לכל משתמש.</p>
+                    </div>
+                </li>
+                <li class="flex items-start gap-4">
+                    <div class="w-6 h-6 bg-blue-500/20 rounded flex items-center justify-center mt-1">
+                        <svg class="w-4 h-4 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
+                    </div>
+                    <div>
+                        <strong class="text-white">דיווחים חכמים:</strong>
+                        <p class="text-gray-400 text-sm">קבל תמונת מצב מדויקת על התקדמות הצוות שלך.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="bg-gradient-to-br from-blue-900/40 to-black border border-white/10 p-6 rounded-3xl shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500">
+            <div class="flex justify-between items-center mb-6">
+                <div class="h-2 w-24 bg-white/10 rounded-full"></div>
+                <div class="h-6 w-16 bg-blue-500/20 rounded-full"></div>
+            </div>
+            <div class="space-y-4">
+                <div class="h-4 w-full bg-white/5 rounded-lg"></div>
+                <div class="h-4 w-3/4 bg-white/5 rounded-lg"></div>
+                <div class="h-4 w-1/2 bg-blue-500/20 rounded-lg border border-blue-500/30"></div>
+            </div>
+            <div class="mt-8 pt-6 border-t border-white/10 flex gap-3">
+                <div class="w-10 h-10 rounded-full bg-gray-800"></div>
+                <div class="space-y-2">
+                    <div class="h-3 w-20 bg-white/10 rounded"></div>
+                    <div class="h-2 w-12 bg-white/5 rounded"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 {% endblock %}

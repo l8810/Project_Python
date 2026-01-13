@@ -1,42 +1,111 @@
-{% extends 'base.html' %}
+{% extends 'base_layout.html' %}
 {% load static %}
+
 {% block content %}
+<div class="flex items-center justify-center min-h-[80vh] animate-content py-10">
+    <div class="w-full max-w-2xl">
+        <div class="bg-white/5 backdrop-blur-xl border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl relative overflow-hidden">
 
-<form method="post" class="register-form">
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl"></div>
 
-{% csrf_token %}
+            <div class="relative z-10">
+                <div class="text-center mb-10">
+                    <h2 class="text-4xl font-extrabold text-white mb-3 tracking-tight">יצירת חשבון חדש</h2>
+                    <p class="text-gray-400">הצטרף לצוות והתחל לנהל משימות בסטנדרט גבוה</p>
+                </div>
 
-<div>
+                <form method="post" class="space-y-6">
+                    {% csrf_token %}
 
-{{ user_form.username.label_tag }} {{ user_form.username }}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-4">
+                            <h3 class="text-sm font-bold text-blue-400 uppercase tracking-widest border-b border-white/5 pb-2">פרטי התחברות</h3>
 
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-2 mr-1">שם משתמש</label>
+                                {{ user_form.username }}
+                                {% if user_form.username.errors %}
+                                    <p class="text-red-400 text-[10px] mt-1">{{ user_form.username.errors.0 }}</p>
+                                {% endif %}
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-2 mr-1">סיסמה</label>
+                                {{ user_form.password1 }}
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-2 mr-1">אימות סיסמה</label>
+                                {{ user_form.password2 }}
+                            </div>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-sm font-bold text-cyan-400 uppercase tracking-widest border-b border-white/5 pb-2">שיוך ארגוני</h3>
+
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-2 mr-1">בחר צוות</label>
+                                {{ person_form.team }}
+                            </div>
+
+                            <div>
+                                <label class="block text-xs text-gray-400 mb-2 mr-1">תפקיד במערכת</label>
+                                {{ person_form.role }}
+                            </div>
+
+                            <div class="bg-blue-500/5 p-4 rounded-2xl border border-blue-500/10 mt-6">
+                                <p class="text-[11px] text-gray-400 leading-relaxed">
+                                    * שים לב: בחירת התפקיד קובעת את רמת ההרשאות שלך במערכת (צפייה בלבד או ניהול משימות).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-6">
+                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 text-white rounded-2xl font-bold text-lg shadow-xl shadow-blue-500/20 transition-all hover:scale-[1.01] active:scale-95">
+                            צור חשבון והתחבר
+                        </button>
+                    </div>
+                </form>
+
+                <div class="mt-8 text-center border-t border-white/5 pt-6">
+                    <p class="text-gray-500 text-sm">
+                        כבר יש לך חשבון?
+                        <a href="{% url 'login' %}" class="text-blue-400 hover:text-blue-300 font-bold no-underline transition-colors">היכנס כאן</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
+<style>
+    /* עיצוב שדות הטופס להרמוניה עם ה-Dark Mode */
+    input[type="text"],
+    input[type="password"],
+    input[type="email"],
+    select {
+        width: 100%;
+        background: rgba(255, 255, 255, 0.03) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 1rem !important;
+        padding: 0.75rem 1rem !important;
+        color: white !important;
+        font-size: 0.9rem !important;
+        transition: all 0.3s ease !important;
+    }
 
-{{ user_form.password1.label_tag }} {{ user_form.password1 }}
+    input:focus, select:focus {
+        outline: none !important;
+        background: rgba(255, 255, 255, 0.07) !important;
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15) !important;
+    }
 
-</div>
-
-<div>
-
-{{ user_form.password2.label_tag }} {{ user_form.password2 }}
-
-</div>
-
-<div>
-
-{{ person_form.team.label_tag }} {{ person_form.team }}
-
-</div>
-
-<div>
-
-{{ person_form.role.label_tag }} {{ person_form.role }}
-
-</div>
-
-<button type="submit">Register</button> <!-- לחצן שליחה -->
-
-</form>
+    /* התאמת צבע האופציות ב-Select לרקע כהה */
+    select option {
+        background-color: #1e293b;
+        color: white;
+    }
+</style>
 {% endblock %}
