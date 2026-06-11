@@ -117,13 +117,21 @@ Open your browser at **http://127.0.0.1:8000**
 
 ## Screenshots
 
-> Dashboard – Task Board
+> Home Page
 
-![Tasks Dashboard](https://via.placeholder.com/800x400?text=Tasks+Dashboard)
+![Home](docs/screenshots/home.png)
+
+> Login Page
+
+![Login](docs/screenshots/login.png)
 
 > Registration Page
 
-![Register](https://via.placeholder.com/800x400?text=Register+Page)
+![Register](docs/screenshots/register.png)
+
+> Task Dashboard
+
+![Dashboard](docs/screenshots/dashboard.png)
 
 ---
 
